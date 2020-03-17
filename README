@@ -1,0 +1,10 @@
+# -*- org -*-
+
+* はじめに
+大量の画像ファイルをexcel に貼り付けてコメントするとこまで自動化したい。
+七條さんおすすめのPhoto Manager 14 を兵庫シカR01 で報告書作成に使ってみたが、使
+い勝手て悪くて遅いから。
+
+* とっかかりはこのサイトから
+https://tonari-it.com/excel-vba-shapes-addpicture-batch/
+
