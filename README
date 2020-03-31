@@ -5,8 +5,19 @@
 七條さんおすすめのPhoto Manager 14 を兵庫シカR01 で報告書作成に使ってみたが、使
 い勝手て悪くて遅いから。
 
-* とっかかりはこのへんのサイトから
+** とっかかりはこのへんのサイトから
 https://tonari-it.com/excel-vba-shapes-addpicture-batch/
 [[https://www.tipsfound.com/vba/09010]]
 [[http://officetanaka.net/excel/vba/cell/cell07.htm]]
+** このへんのサイトも画像関連
+https://selifelog.com/blog-entry-1614.html
+http://skill-note.net/post-851/
+https://exceloffthegrid.com/vba-code-to-insert-move-delete-and-control-pictures/
+** 文字挿入
+https://stackoverflow.com/questions/20612415/adding-text-to-a-cell-in-excel-using-vba
+** 印刷範囲とか
+https://tonari-it.com/excel-vba-print-area/
+** CSV
+https://excel-ubara.com/excelvba5/EXCEL111.html
+
 
