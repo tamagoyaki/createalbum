@@ -69,6 +69,11 @@ Sub drawtext(cx, cy, text)
    Range(Cells(cy, cx), Cells(cy, cx)).value = text
 End Sub
 
+Sub textformat(cx, cy, indlv, align)
+   Range(Cells(cy, cx), Cells(cy, cx)).IndentLevel = indlv
+   Range(Cells(cy, cx), Cells(cy, cx)).HorizontalAlignment = align
+End Sub
+
 Sub createalbum()
    ' position (cell base)
    top = ITOP
@@ -116,6 +121,7 @@ Sub createalbum()
 	    Case else
 	       res = "cmt: " + s
 	       drawtext GLEFT, top + i - 2, s
+	       textformat GLEFT, top + i - 2, 1, xlLeft
 	 End Select
 
 	 Debug.Print(res)
@@ -139,6 +145,18 @@ Sub createalbum()
       index = index + 1
       top = top + IHEIGHT + INTERMEDIATE
    Loop
+
+
+   ' remaining ?
+   If Not 0 = (index - 1) Mod CHUNK Then
+      Set r = Range(topleft, Cells(top + IHEIGHT - 1, GLEFT))
+
+      If CHUNK => index Then
+	    Set prange = r
+      Else
+	    Set prange = Union(prange, r)
+      End If
+   End If
 
    prange.Name = "PrintArea"
    ActiveSheet.PageSetup.PrintArea = "PrintArea"
