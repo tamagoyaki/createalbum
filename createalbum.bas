@@ -17,6 +17,7 @@ End Sub
 
 Private Sub deleteallcontents()
    ActiveSheet.Cells.Clear
+   ActiveWindow.ScrollRow = 1
 End Sub
 
 '
@@ -37,14 +38,14 @@ Sub drawimage(cx, cy, cw, ch, file, dig)
    ' keep aspect ratio but height
    With shp
       .LockAspectRatio = msoTrue
+      .rotation = 0
       .ScaleHeight 1, msoTrue
-      .ScaleWidth 1, msoTrue
 
       Select Case dig
-	 Case 90, 270
+	 Case 90, -90, 270
 	    .Width = ch * h
-	    .Top = .Top + (h * 1.4)
-	    .Left = .Left - (w * 0.46)
+	    .Top = .Top - (.Height - .Width) / 2
+	    .Left = .Left - (.Width - .Height) / 2
 	 Case Is = 180
 	    .Height = ch * h
 	 Case Else
@@ -97,6 +98,12 @@ Sub createalbum()
       .Filters.Add "photo list", "*.createalbum", 1
       If .Show <> -1 Then Exit Sub
    End With
+
+   ' regex for search comment line.
+   Set reg = CreateObject("VBScript.RegExp")
+   With reg
+      .Pattern = "^[ #]"
+   End With
     
    ' read selected file as CSV
    fnum = FreeFile
@@ -104,9 +111,17 @@ Sub createalbum()
 
    Do Until EOF(fnum)
       Line Input #fnum, record
-      arry = split(record, ",")
+
+      ' comment line ?
+      Set matches = reg.Execute(record)
+
+      If Not 0 = matches.Count Then
+	 GoTo continue
+      End if
 
       ' parse csv
+      arry = split(record, ",")
+
       For i = 0 To UBound(arry)
 	 s = Trim(arry(i))
 	  
@@ -144,8 +159,11 @@ Sub createalbum()
       ' next
       index = index + 1
       top = top + IHEIGHT + INTERMEDIATE
+continue:
    Loop
 
+   ' clean up
+   Close #fnum
 
    ' remaining ?
    If Not 0 = (index - 1) Mod CHUNK Then
