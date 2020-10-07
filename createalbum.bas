@@ -75,6 +75,13 @@ Sub textformat(cx, cy, indlv, align)
    Range(Cells(cy, cx), Cells(cy, cx)).HorizontalAlignment = align
 End Sub
 
+'
+' Required CSV format.
+'
+'   # absolute path, lotate degree, comment1, comment2, ... , comment N
+'   C:\Users\matsuda\Desktop\200913\H1\84637.jpg, 0, 20/09/13, trap, install
+'
+'
 Sub createalbum()
    ' position (cell base)
    top = ITOP
