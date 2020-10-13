@@ -1,22 +1,18 @@
-PHOTO_DIR = ./
-EXT = JPG
+SRCDIR = ./
+REGEXT = [jJ][pP][gG]
 
 help:
 	@echo 'make check-ext'
-	@echo 'make list > list.createalbum'
-
+	@echo 'make list | nkf -s -Lw -c > list.createalbum'
 
 check-ext:
-	@find . -type f | sed 's/.*\(...\)/\1/' | sort | uniq
-
-TOALBUM = sed 's/$$/, 0,/'
-TOSJISDOS = nkf -s -Lw -c
+	@find $(SRCDIR) -type f | sed 's/.*\(...\)/\1/' | sort | uniq
 
 # as an example
 list:
-	@{ \
-		for file in `find . -iname "*.$(EXT)"`; do\
-			comment=`echo $$file | awk -F/ '{print $$2","$$3","$$4","$$5","$$6}' | sed 's/,[^,]*\.[jJ][pP][gG]//'` ; \
-			wslpath -w $$file | sed "s/$$/, 0, $$comment/" | $(TOSJISDOS) ; \
+	{ \
+		for file in `find $(SRCDIR) -iname "*.$(REGEXT)"`; do\
+			comment=`echo $$file | sed 's/\//,/g;s/,[^,]*\.$(REGEXT)//'` ; \
+			wslpath -w $$file | sed "s/$$/, 0, $$comment/" ; \
 		done; \
 	}

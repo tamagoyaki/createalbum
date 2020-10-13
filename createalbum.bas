@@ -49,7 +49,7 @@ Sub drawimage(cx, cy, cw, ch, file, dig)
 	 Case Is = 180
 	    .Height = ch * h
 	 Case Else
-	    .Height = ch * h
+	    .Width = (cw - 1) * w
 	    dig = 0
       End Select
       
