@@ -73,6 +73,7 @@ End Sub
 Sub textformat(cx, cy, indlv, align)
    Range(Cells(cy, cx), Cells(cy, cx)).IndentLevel = indlv
    Range(Cells(cy, cx), Cells(cy, cx)).HorizontalAlignment = align
+   Range(Cells(cy, cx), Cells(cy, cx)).ShrinkToFit = True
 End Sub
 
 '
