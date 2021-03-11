@@ -67,6 +67,7 @@ Sub drawgrid(cx, cy, cw, ch)
 End Sub
 
 Sub drawtext(cx, cy, text)
+   Range(Cells(cy, cx), Cells(cy, cx)).NumberFormatLocal = "@"
    Range(Cells(cy, cx), Cells(cy, cx)).value = text
 End Sub
 
