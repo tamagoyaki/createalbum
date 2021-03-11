@@ -30,7 +30,7 @@ cmtfile = sys.argv[2]
 # find file in comments file
 def ffic(name, array):
     for row in array:
-        if name == row[0]:
+        if name.lower() == row[0].lower():
             return row[1:]
     return None
 
