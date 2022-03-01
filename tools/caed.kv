@@ -1,0 +1,164 @@
+<CaedLayout>:
+    BoxLayout:
+        orientation: 'vertical'
+        size: root.width, root.height
+        padding: 20
+        spacing: 20
+     
+        BoxLayout:
+            size_hint: 0.25, 0.2
+            
+            Button:
+                id: btn_save
+                text: 'save'
+                on_press: root.onsave()
+
+        RecycleView:
+            id: rv        
+            viewclass: 'Button'
+            bar_width: dp(10)
+            scroll_wheel_distance: sp(120)
+            scroll_type: ['bars', 'content']
+            scroll_timeout: 100
+            RecycleBoxLayout:
+                default_size: None, dp(28)
+                default_size_hint: 0.99, None
+                size_hint_y: None
+                height: self.minimum_height
+                orientation: 'vertical'
+
+        BoxLayout:
+            size_hint: 1, 0.08
+
+            FloatLayout:        
+                CheckBox:
+                    id: ck_usepath
+                    active: True
+                    size_hint: (0.1, 1.0)
+                    pos_hint: {'x': 0, 'y': 0.2}
+                    on_press: root.onusepath(self.active)
+                Label:
+                    valign: 'top'
+                    text: 'use path as comments'
+                    text_size: self.size
+                    pos_hint: {'x': 0.08, 'y': 0.2}
+                    
+                Label:
+                    id: lb_ignore
+                    valign: 'top'
+                    text: 'ignore'
+                    text_size: self.size
+                    pos_hint: {'x': 0.4, 'y': 0.2}
+                Spinner:
+                    id: sp_ignore
+                    text: '0'
+                    values: '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'
+                    size_hint: (0.1, 1.0)
+                    pos_hint: {'x': 0.5, 'y': 0.2}
+                
+                CheckBox:
+                    id: ck_usename
+                    size_hint: (0.1, 1.0)
+                    pos_hint: {'x': 0.7, 'y': 0.2}
+                Label:
+                    id: lb_usename
+                    valign: 'top'
+                    text: 'use filename'
+                    text_size: self.size
+                    pos_hint: {'x': 0.78, 'y': 0.2}
+                    
+        BoxLayout:
+            size: root.width, root.height
+
+            Image:
+                id: my_image
+
+            GridLayout:
+                cols: 1
+                    
+                TextInput:
+                    id: comment1
+                    multiline: False
+                    write_tab: False
+                    size_hint_y: None
+                    height: self.font_size + 12
+
+                TextInput:
+                    id: comment2
+                    multiline: False
+                    write_tab: False
+                    size_hint_y: None
+                    height: self.font_size + 12
+                
+                TextInput:
+                    id: comment3
+                    multiline: False
+                    write_tab: False
+                    size_hint_y: None
+                    height: self.font_size + 12
+                
+                TextInput:
+                    id: comment4
+                    multiline: False
+                    write_tab: False
+                    size_hint_y: None
+                    height: self.font_size + 12
+                
+                TextInput:
+                    id: comment5
+                    multiline: False
+                    write_tab: False
+                    size_hint_y: None
+                    height: self.font_size + 12
+
+                TextInput:
+                    id: comment6
+                    multiline: False
+                    write_tab: False
+                    size_hint_y: None
+                    height: self.font_size + 12
+                    
+                TextInput:
+                    id: comment7
+                    multiline: False
+                    write_tab: False
+                    size_hint_y: None
+                    height: self.font_size + 12
+
+                BoxLayout:
+                    Button:
+                        id: btn_ok
+                        text: 'ok'
+                        on_press: root.onok()
+
+                    Button:
+                        id: btn_cancel
+                        text: 'cancel'    
+                        on_press: root.oncancel()
+                                
+<SaveDialog>:
+    BoxLayout:
+        size: root.size
+        pos: root.pos
+        orientation: 'vertical'
+        FileChooserListView:
+            id: filechooser
+            on_selection: root.selected(filechooser.selection, filename.text)
+
+        TextInput:
+            id: filename
+            size_hint_y: None
+            height: 30
+            multiline: False
+
+        BoxLayout:
+            size_hint_y: None
+            height: 30
+
+            Button:
+                text: 'cancel'
+                on_release: root.cancel()
+            Button:
+                text: 'save'    
+                on_release: root.save(filechooser.path, filename.text)
+                            
