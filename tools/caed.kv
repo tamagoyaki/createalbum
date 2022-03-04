@@ -14,11 +14,26 @@
                 on_press: root.onsave()
 
         RecycleView:
-            id: rv        
+            id: rv
             viewclass: 'Button'
             bar_width: dp(10)
             scroll_wheel_distance: sp(120)
-            scroll_type: ['bars', 'content']
+
+            #
+            # NOTE: Scrollbar has a bug!!
+            #
+            #   I got an error message 'IndexError: list index out of range'
+            #   when I clicked on scrollbar. the bug is described by URL below.
+            #
+            #     https://github.com/kivy/kivy/issues/7256
+            #
+            #   The workaround is here.
+            #
+            #     https://stackoverflow.com/questions/69019054/kivy-scrollview-code-error-with-scrollbars-or-bug
+            #
+            #   So, I use "scroll_type: ['bars']" instead of ['bars', 'content']
+            #
+            scroll_type: ['bars']
             scroll_timeout: 100
             RecycleBoxLayout:
                 default_size: None, dp(28)
@@ -161,4 +176,11 @@
             Button:
                 text: 'save'    
                 on_release: root.save(filechooser.path, filename.text)
-                            
+
+<ProgressDialog>:
+    BoxLayout:
+        pos: root.pos
+        ProgressBar:
+            id: pbar
+            max: 1
+            value: 0
